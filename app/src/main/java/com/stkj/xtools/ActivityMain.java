@@ -7,9 +7,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
