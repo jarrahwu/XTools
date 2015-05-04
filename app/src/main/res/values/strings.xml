@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">XTools</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="network_err">网络不给力</string>
+</resources>
