@@ -40,7 +40,7 @@ public abstract class Pull<E> implements PullToRefreshAdapterViewBase.OnRefreshL
         mHttp = new Http();
         mType = type;
         mRefreshPack = BuildRefresh();
-        //callback for refresh
+        //callback for load
         mRefreshCB = getRefreshCallBack();
         //callback for load more
         mLoadMoreCB = getLoadMoreCallBack();
@@ -82,9 +82,9 @@ public abstract class Pull<E> implements PullToRefreshAdapterViewBase.OnRefreshL
 
     @Override
     public void onRefresh(PullToRefreshBase refreshView) {
-        Log.from(this, "on refresh");
+        Log.from(this, "on load");
         if (mRefreshPack == null) {
-            Log.from(this, "check build refresh");
+            Log.from(this, "check build load");
         } else {
             fetch(mRefreshPack.url, mRefreshPack.jo, mRefreshCB);
         }

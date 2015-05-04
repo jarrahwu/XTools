@@ -17,6 +17,7 @@ import java.util.ArrayList;
 public class ActivityMain extends BindActivity {
 
     public static final String URL = "http://192.168.17.132:8888/apks";
+
     @Bind(id = R.id.list)
     PullToRefreshListView mListView;
     Adapter mAdapter;
@@ -29,8 +30,7 @@ public class ActivityMain extends BindActivity {
     protected void onViewDidLoad(Bundle savedInstanceState) {
         mAdapter = new Adapter(this);
         mListView.setAdapter(mAdapter);
-        PullHelper helper = new PullHelper();
-        helper.refresh(mListView, getPull());
+        PullHelper.easyLoad(Pull.Pack.make(URL, null), Item.class, mAdapter, mListView);
     }
 
     private Pull<Item> getPull() {
@@ -61,6 +61,7 @@ public class ActivityMain extends BindActivity {
     }
 
     static class Item {
+
         private String title;
         private String size;
 
@@ -90,12 +91,6 @@ public class ActivityMain extends BindActivity {
         @Override
         protected void onBindView(final int position, Item item, TextView view) {
             view.setText(String.format("APK : %S [size %s]", item.title, item.size));
-            view.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    remove(getItem(position));
-                }
-            });
         }
 
         @Override
