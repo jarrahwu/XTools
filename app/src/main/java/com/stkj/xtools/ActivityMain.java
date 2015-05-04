@@ -20,7 +20,9 @@ public class ActivityMain extends BindActivity {
 
     @Bind(id = R.id.list)
     PullToRefreshListView mListView;
+
     Adapter mAdapter;
+
     @Override
     protected int onLoadViewResource() {
         return R.layout.activity_main;

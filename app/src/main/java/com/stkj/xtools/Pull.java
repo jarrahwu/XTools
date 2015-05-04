@@ -10,8 +10,9 @@ import java.util.ArrayList;
 
 /**
  * Created by jarrah on 2015/5/4.
+ * ABS network loader
+ * @param <E>    Item type
  */
-//E ArrayList Item Type
 public abstract class Pull<E> implements PullToRefreshAdapterViewBase.OnRefreshListener, PullToRefreshAdapterViewBase.OnLastItemVisibleListener {
 
     private Http mHttp;
@@ -24,6 +25,9 @@ public abstract class Pull<E> implements PullToRefreshAdapterViewBase.OnRefreshL
     private Pack mLoadMorePack;
 
 
+    /**
+     * for Pull request
+     */
     public static class Pack {
         String url;
         JSONObject jo;
@@ -72,12 +76,29 @@ public abstract class Pull<E> implements PullToRefreshAdapterViewBase.OnRefreshL
         };
     }
 
+    /**
+     * onLoadMore call back
+     * @param array the call back result
+     */
     protected abstract void onLoadMoreCallBack(ArrayList<E> array);
 
+    /**
+     * onRefresh call back
+     * @param array the call back result
+     */
     protected abstract void onRefreshCallBack(ArrayList<E> array);
 
+    /**
+     * for next request
+     * @param response the response from refresh
+     * @return request pack
+     */
     protected abstract Pack BuildLoadMore(JSONObject response);
 
+    /**
+     * refresh request pack
+     * @return
+     */
     protected abstract Pack BuildRefresh();
 
     @Override
@@ -136,7 +157,10 @@ public abstract class Pull<E> implements PullToRefreshAdapterViewBase.OnRefreshL
             }
         }
 
-        // escape JSON response
+        /**
+         * escape http response
+         * @param response
+         */
         protected void escape(JSONObject response) {
             JSONArray items = escapeResponse(response);
             ArrayList<T> array = new ArrayList<T>();
@@ -148,6 +172,11 @@ public abstract class Pull<E> implements PullToRefreshAdapterViewBase.OnRefreshL
             }
         }
 
+        /**
+         * escape items response
+         * @param response
+         * @return
+         */
         private JSONArray escapeResponse(JSONObject response) {
             return response.optJSONArray("items");
         }

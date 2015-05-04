@@ -30,6 +30,7 @@ public abstract class BindView extends FrameLayout implements
 		init();
 	}
 
+
 	private void init() {
 		mLayoutInflater = (LayoutInflater) getContext().getSystemService(
 				Context.LAYOUT_INFLATER_SERVICE);
