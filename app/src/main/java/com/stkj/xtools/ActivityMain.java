@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 
 import org.json.JSONObject;
@@ -61,7 +60,6 @@ public class ActivityMain extends BindActivity {
         };
     }
 
-    @JsonIgnoreProperties(ignoreUnknown = true)
     static class Item {
         private String title;
         private String size;
@@ -90,8 +88,14 @@ public class ActivityMain extends BindActivity {
         }
 
         @Override
-        protected void onBindView(int position, Item item, TextView view) {
+        protected void onBindView(final int position, Item item, TextView view) {
             view.setText(String.format("APK : %S [size %s]", item.title, item.size));
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    remove(getItem(position));
+                }
+            });
         }
 
         @Override
@@ -99,5 +103,4 @@ public class ActivityMain extends BindActivity {
             return new TextView(getContext());
         }
     }
-
 }
