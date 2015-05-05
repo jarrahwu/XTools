@@ -1,7 +1,7 @@
 package com.stkj.xtools;
 
-import com.handmark.pulltorefresh.library.PullToRefreshAdapterViewBase;
-import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.stkj.xtools.pull2refresh.PullToRefreshAdapterViewBase;
+import com.stkj.xtools.pull2refresh.PullToRefreshBase;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -32,7 +32,7 @@ public abstract class Pull<E> implements PullToRefreshAdapterViewBase.OnRefreshL
         String url;
         JSONObject jo;
 
-        static Pack make(String url, JSONObject jo) {
+        public static Pack make(String url, JSONObject jo) {
             Pack request = new Pack();
             request.url = url;
             request.jo = jo;
