@@ -111,6 +111,15 @@ public abstract class Pull<E> implements PullToRefreshAdapterViewBase.OnRefreshL
         }
     }
 
+
+    public void refresh() {
+        if(mRefreshPack == null || mRefreshPack == null) {
+           Log.from(this, "refresh pack or callback is null.");
+        }else {
+            fetch(mRefreshPack.url, mRefreshPack.jo, mRefreshCB);
+        }
+    }
+
     private void fetch(String url, JSONObject jo, CallBack<E> cb) {
         mHttp.url(url);
         if (jo != null) {

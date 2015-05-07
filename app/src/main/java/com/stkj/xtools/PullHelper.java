@@ -46,9 +46,9 @@ public class PullHelper {
                 return pack;
             }
         };
-
         base.setOnRefreshListener(pull);
         base.setOnLastItemVisibleListener(pull);
+        pull.refresh();
     }
 
     private static Pull.Pack safeNextPack(JSONObject response) {
