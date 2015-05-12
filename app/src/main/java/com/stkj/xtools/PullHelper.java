@@ -1,5 +1,6 @@
 package com.stkj.xtools;
 
+import com.android.volley.VolleyError;
 import com.stkj.xtools.pull2refresh.PullToRefreshAdapterViewBase;
 
 import org.json.JSONArray;
@@ -26,7 +27,12 @@ public class PullHelper {
             @Override
             protected void onLoadMoreCallBack(ArrayList<E> array) {
                 base.onRefreshComplete();
-                adapterCompat.addAll(array);
+                if(array.size() > 0) {
+                    adapterCompat.addAll(array);
+                }
+                else {
+                    Util.toast(R.string.to_the_end);
+                }
             }
 
             @Override
@@ -34,6 +40,18 @@ public class PullHelper {
                 base.onRefreshComplete();
                 adapterCompat.clear();
                 adapterCompat.addAll(array);
+            }
+
+            @Override
+            protected void onLoadMoreError(VolleyError error) {
+                super.onLoadMoreError(error);
+                base.onRefreshComplete();
+            }
+
+            @Override
+            protected void onRefreshError(VolleyError error) {
+                super.onRefreshError(error);
+                base.onRefreshComplete();
             }
 
             @Override
@@ -46,6 +64,7 @@ public class PullHelper {
                 return pack;
             }
         };
+
         base.setOnRefreshListener(pull);
         base.setOnLastItemVisibleListener(pull);
         pull.refresh();

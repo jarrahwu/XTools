@@ -1,5 +1,6 @@
 package com.stkj.xtools;
 
+import com.android.volley.VolleyError;
 import com.stkj.xtools.pull2refresh.PullToRefreshAdapterViewBase;
 import com.stkj.xtools.pull2refresh.PullToRefreshBase;
 
@@ -52,10 +53,23 @@ public abstract class Pull<E> implements PullToRefreshAdapterViewBase.OnRefreshL
 
     private CallBack<E> getLoadMoreCallBack() {
         return new CallBack<E>(mType) {
+
+            @Override
+            protected void escape(JSONObject response) {
+                super.escape(response);
+                mLoadMorePack = BuildLoadMore(response);
+            }
+
             @Override
             public void onResult(ArrayList<E> array) {
                 super.onResult(array);
                 onLoadMoreCallBack(array);
+            }
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                super.onErrorResponse(error);
+                onLoadMoreError(error);
             }
         };
     }
@@ -73,7 +87,21 @@ public abstract class Pull<E> implements PullToRefreshAdapterViewBase.OnRefreshL
                 super.onResult(array);
                 onRefreshCallBack(array);
             }
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                super.onErrorResponse(error);
+                onRefreshError(error);
+            }
         };
+    }
+
+    protected void onLoadMoreError(VolleyError error) {
+        Log.from(this, "onLoadMoreError");
+    }
+
+    protected void onRefreshError(VolleyError error) {
+        Log.from(this, "onRefreshError");
     }
 
     /**

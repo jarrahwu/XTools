@@ -16,6 +16,10 @@ public class Util {
                 text, Toast.LENGTH_SHORT).show();
     }
 
+    public static void toast(int res) {
+        Toast.makeText(XTool.getInstance().getContext(), res, Toast.LENGTH_SHORT).show();
+    }
+
 
     public static boolean isInputEmpty(String input, String toast) {
         if (TextUtils.isEmpty(input)) {
