@@ -82,7 +82,7 @@ public abstract class AbstractHttp<T extends AbstractHttp<T>> {
 		// set cookie
 		if (!TextUtils.isEmpty(getCookieKey())
 				&& !TextUtils.isEmpty(getCookieValue()))
-			request.addRequstHeader(getCookieKey(), getCookieValue());
+			request.addRequestHeader(getCookieKey(), getCookieValue());
 	}
 
 	public T url(String url) {

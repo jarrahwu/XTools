@@ -25,7 +25,7 @@ public class BaseHttpRequest extends JsonObjectRequest {
 		return mHeader;
 	}
 
-	public void addRequstHeader(String key, String value) {
+	public void addRequestHeader(String key, String value) {
 		mHeader.put(key, value);
 	}
 }
